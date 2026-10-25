@@ -20,8 +20,8 @@ ports:
 
 # --- Environment overrides ---
 environment:
-  - NO_CORS=1
-  - APP_PATH=/config/stremio
+  NO_CORS: "1"
+  APP_PATH: "/config/stremio"
 
 # --- Persistent data volume ---
 volumes:
