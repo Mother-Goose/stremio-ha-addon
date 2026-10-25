@@ -24,8 +24,11 @@ environment:
   APP_PATH: "/config/stremio"
 
 # --- Persistent data volume ---
-volumes:
-  - /config/stremio:/root/.stremio-server:rw
+# Map add-on private data directory → container /root/.stremio-server
+map:
+  - type: data
+    path: /root/.stremio-server
+    read_only: false
 
 # Required by HA add-on runtime
 host_network: false
