@@ -15,8 +15,8 @@ build:
 
 # --- Ports exposed to HA host ---
 ports:
-  - port: 11470
-  - port: 12470
+  - 11470/tcp
+  - 12470/tcp
 
 # --- Environment overrides ---
 environment:
