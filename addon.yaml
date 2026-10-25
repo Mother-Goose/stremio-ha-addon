@@ -1,0 +1,32 @@
+---
+name: "Stremio Server"
+slug: "stremio-server"
+version: "4.20.3-1"
+version_str: "4.20.3-1"
+description: "Self-hosted Stremio streaming server for Home Assistant"
+url: "https://github.com/Stremio/server-docker"
+
+# --- Build config — bump `args.VERSION` to update upstream ---
+build:
+  dockerfile: ./Dockerfile
+  args:
+    VERSION: "v4.20.3"
+    JELLYFIN_VERSION: "4.4.1-4"
+
+# --- Ports exposed to HA host ---
+ports:
+  - port: 11470
+  - port: 12470
+
+# --- Environment overrides ---
+environment:
+  - NO_CORS=1
+  - APP_PATH=/config/stremio
+
+# --- Persistent data volume ---
+volumes:
+  - /config/stremio:/root/.stremio-server:rw
+
+# Required by HA add-on runtime
+host_network: false
+arch: [amd64, arm64, armv7]
