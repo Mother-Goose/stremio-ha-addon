@@ -1,0 +1,8 @@
+---
+name: Stremio HA Add-on Repository
+description: Self-hosted streaming media server add-ons including Stremio Server
+maintainers:
+  - Mother-Goose (@Mother-Goose)
+  - Claude Code (<noreply@anthropic.com>)
+author: Mother-Goose
+support: https://github.com/Mother-Goose/stremio-ha-addon/issues
