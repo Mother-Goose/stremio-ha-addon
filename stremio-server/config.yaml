@@ -32,4 +32,4 @@ map:
 
 # Required by HA add-on runtime
 host_network: false
-arch: [amd64, arm64, armv7]
+arch: [amd64, aarch64, armv7]
