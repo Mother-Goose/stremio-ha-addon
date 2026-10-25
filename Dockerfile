@@ -13,24 +13,30 @@ LABEL description="Stremio's streaming Server (HA add-on)"
 SHELL ["/bin/sh", "-c"]
 WORKDIR /stremio
 
+# Rewrite buster sources to archive.debian.org BEFORE any apt-get update.
+# Debian buster (10) is EOL, so deb.debian.org no longer serves it; the
+# upstream Dockerfile's sed fix must run first, otherwise apt-get update fails.
+RUN sed -i 's/deb\.debian/archive.debian/g' /etc/apt/sources.list
+
 # Install wget (needed for server.js fetch)
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates \
+    && apt-get install -y --no-install-recommends ca-certificates wget \
     && rm -rf /var/lib/apt/lists/*
 
-# ——— ffmpeg install (kept identical to upstream) ———
-# Fixes archive.debian.org issue present in upstream Dockerfile
-RUN sed -i 's/deb\.debian/archive.debian/g' /etc/apt/sources.list \
+# ——— ffmpeg install — —
+# The jellyfin-ffmpeg .deb filename includes the architecture token
+# (e.g. _arm64.deb); the upstream Dockerfile hardcoded -buster.deb (no arch),
+# which fails because dpkg can't resolve the file. Use the real filename.
+# apt-get update is needed here too: the earlier step purged /var/lib/apt/lists.
+RUN ARCH=$(dpkg --print-architecture) \
+    && wget https://repo.jellyfin.org/archive/ffmpeg/debian/${JELLYFIN_VERSION}/jellyfin-ffmpeg_${JELLYFIN_VERSION}-buster_${ARCH}.deb \
     && apt-get update \
-    && apt-get install -y --no-install-recommends wget
-
-RUN wget https://repo.jellyfin.org/archive/ffmpeg/debian/${JELLYFIN_VERSION}/jellyfin-ffmpeg_${JELLYFIN_VERSION}-buster_$(dpkg --print-architecture).deb \
-    && apt-get install -y ./jellyfin-ffmpeg_${JELLYFIN_VERSION}-buster.deb \
-    && rm jellyfin-ffmpeg_${JELLYFIN_VERSION}-buster.deb
+    && apt-get install -y ./jellyfin-ffmpeg_${JELLYFIN_VERSION}-buster_${ARCH}.deb \
+    && rm jellyfin-ffmpeg_${JELLYFIN_VERSION}-buster_${ARCH}.deb
 
 # ——— Copy download script + fetch server.js via build arg ———
 COPY download_server.sh download_server.sh
-RUN VERSION=${VERSION} ./download_server.sh
+RUN chmod +x download_server.sh && VERSION=${VERSION} ./download_server.sh
 
 # Overlay any local files for custom builds
 COPY . .
