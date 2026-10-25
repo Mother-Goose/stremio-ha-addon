@@ -1,8 +1,8 @@
 ---
 name: "Stremio Server"
 slug: "stremio-server"
-version: "4.20.3-1"
-version_str: "4.20.3-1"
+version: "1.0.0"
+version_str: "1.0.0"
 description: "Self-hosted Stremio streaming server for Home Assistant"
 url: "https://github.com/Stremio/server-docker"
 
