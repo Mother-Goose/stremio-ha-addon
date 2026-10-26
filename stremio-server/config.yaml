@@ -27,21 +27,14 @@ map:
     read_only: false
 
 # --- Environment overrides ---
-# IPADDRESS can be set in HA's add-on Configuration editor → options.
-# Without legacy:true, options are stored but NOT passed as Docker env vars.
-# To enable IPADDRESS as a Docker env var, set legacy: true below.
+# NO_CORS and APP_PATH are required for HA compatibility.
+# IPADDRESS is optional — set to your HA host LAN IP (e.g. "192.168.1.50") in
+# HA's add-on Configuration YAML editor to enable automatic HTTPS cert
+# generation via stremio.rocks. Leave empty for HTTP-only on port 11470.
 environment:
   NO_CORS: "1"
   APP_PATH: "/config/stremio"
   IPADDRESS: ""
-
-# --- User-configurable options (appears in HA add-on Configuration editor) ---
-options:
-  IPADDRESS: ""
-
-# For legacy apps, options are passed as Docker environment variables.
-# Uncomment the next line to enable IPADDRESS→env-var mapping.
-legacy: true
 
 # Required by HA add-on runtime
 host_network: false
