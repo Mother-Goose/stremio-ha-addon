@@ -27,16 +27,21 @@ map:
     read_only: false
 
 # --- Environment overrides ---
+# IPADDRESS can be set in HA's add-on Configuration editor → options.
+# Without legacy:true, options are stored but NOT passed as Docker env vars.
+# To enable IPADDRESS as a Docker env var, set legacy: true below.
 environment:
   NO_CORS: "1"
   APP_PATH: "/config/stremio"
+  IPADDRESS: ""
 
 # --- User-configurable options (appears in HA add-on Configuration editor) ---
 options:
   IPADDRESS: ""
 
-schema:
-  IPADDRESS: str
+# For legacy apps, options are passed as Docker environment variables.
+# Uncomment the next line to enable IPADDRESS→env-var mapping.
+legacy: true
 
 # Required by HA add-on runtime
 host_network: false
