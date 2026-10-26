@@ -53,6 +53,6 @@ ENV FFPROBE_BIN=/usr/lib/jellyfin-ffmpeg/ffprobe
 ENV APP_PATH=/config/stremio
 ENV NO_CORS=1
 ENV CASTING_DISABLED=1
-ENV IPADDRESS=192.168.5.81
+ENV IPADDRESS=87.74.111.100
 
 ENTRYPOINT ["node", "server.js"]
