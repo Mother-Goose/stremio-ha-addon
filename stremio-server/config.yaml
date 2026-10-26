@@ -18,11 +18,6 @@ ports:
   "11470/tcp": 11470
   "12470/tcp": 12470
 
-# --- Environment overrides ---
-environment:
-  NO_CORS: "1"
-  APP_PATH: "/config/stremio"
-
 # --- Persistent data volume ---
 # Map add-on private data directory → container /config/stremio (matches APP_PATH environment)
 # This provides persistence for server-settings.json, etc. across container restarts
@@ -30,6 +25,14 @@ map:
   - type: app_config
     path: /config/stremio
     read_only: false
+
+# --- Environment overrides ---
+environment:
+  NO_CORS: "1"
+  APP_PATH: "/config/stremio"
+  # Set IPADDRESS to your HA host's LAN IP to enable automatic HTTPS cert generation
+  # Example: "192.168.1.50" → generates cert for <ip>.stremio.rocks
+  # IPADDRESS: ""
 
 # Required by HA add-on runtime
 host_network: false
