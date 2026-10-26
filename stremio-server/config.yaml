@@ -24,10 +24,11 @@ environment:
   APP_PATH: "/config/stremio"
 
 # --- Persistent data volume ---
-# Map add-on private data directory → container /root/.stremio-server
+# Map add-on private data directory → container /config/stremio (matches APP_PATH environment)
+# This provides persistence for server-settings.json, etc. across container restarts
 map:
-  - type: data
-    path: /root/.stremio-server
+  - type: app_config
+    path: /config/stremio
     read_only: false
 
 # Required by HA add-on runtime
