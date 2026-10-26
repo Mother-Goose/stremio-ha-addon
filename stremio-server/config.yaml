@@ -34,6 +34,8 @@ environment:
   APP_PATH: "/config/stremio"
 
 # --- User-configurable options (appears in HA add-on Configuration editor) ---
+# When legacy: true, user-set options override environment values.
+# This makes IPADDRESS configurable via HA UI and passed to the container.
 options:
   IPADDRESS: ""
 
