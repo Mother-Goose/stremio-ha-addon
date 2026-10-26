@@ -30,9 +30,13 @@ map:
 environment:
   NO_CORS: "1"
   APP_PATH: "/config/stremio"
-  # Set IPADDRESS to your HA host's LAN IP to enable automatic HTTPS cert generation
-  # Example: "192.168.1.50" → generates cert for <ip>.stremio.rocks
-  # IPADDRESS: ""
+
+# --- User-configurable options (appears in HA add-on Configuration editor) ---
+options:
+  IPADDRESS: ""
+
+schema:
+  IPADDRESS: str
 
 # Required by HA add-on runtime
 host_network: false
