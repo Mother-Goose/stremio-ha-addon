@@ -29,18 +29,24 @@ map:
 # --- Environment overrides ---
 # NO_CORS and APP_PATH are required for HA compatibility.
 # IPADDRESS is optional — set via HA add-on Configuration editor → options.
+# When legacy: true (set below), user-set options override environment defaults
+# and are passed to the container as Docker environment variables.
 environment:
   NO_CORS: "1"
   APP_PATH: "/config/stremio"
 
 # --- User-configurable options (appears in HA add-on Configuration editor) ---
-# When legacy: true, user-set options override environment values.
-# This makes IPADDRESS configurable via HA UI and passed to the container.
+# When legacy: true, these option values are passed as Docker environment
+# variables and reach the Stremio server process.
 options:
   IPADDRESS: ""
 
 schema:
   IPADDRESS: str
+
+# For legacy apps, options are passed as Docker environment variables.
+# Set legacy: true so IPADDRESS set in HA UI is forwarded to the container.
+legacy: true
 
 # Required by HA add-on runtime
 host_network: false
