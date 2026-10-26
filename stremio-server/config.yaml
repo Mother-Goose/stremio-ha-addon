@@ -28,13 +28,10 @@ map:
 
 # --- Environment overrides ---
 # NO_CORS and APP_PATH are required for HA compatibility.
-# IPADDRESS is optional — set to your HA host LAN IP (e.g. "192.168.1.50") in
-# HA's add-on Configuration editor to enable automatic HTTPS cert
-# generation via stremio.rocks. Leave empty for HTTP-only on port 11470.
+# IPADDRESS is optional — set via HA add-on Configuration editor → options.
 environment:
   NO_CORS: "1"
   APP_PATH: "/config/stremio"
-  IPADDRESS: ""
 
 # --- User-configurable options (appears in HA add-on Configuration editor) ---
 options:
