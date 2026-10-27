@@ -1,8 +1,8 @@
 ---
 name: "Stremio Server"
 slug: "stremio-server"
-version: "1.1.0"
-version_str: "1.1.0"
+version: "1.2.0"
+version_str: "1.2.0"
 description: "Self-hosted Stremio streaming server for Home Assistant"
 url: "https://github.com/Mother-Goose/stremio-ha-addon"
 
