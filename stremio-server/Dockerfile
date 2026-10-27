@@ -22,16 +22,12 @@ RUN chmod +x start.sh certificate.js
 # Persist data
 VOLUME ["/root/.stremio-server"]
 
-# Expose service ports
-EXPOSE 11470 12470
+# Expose service ports (mapped via config.yaml)
+EXPOSE 11470 8080 12470
 
-# Environment defaults
+# Environment defaults (can be overridden via HA config options)
 ENV FFMPEG_BIN=/usr/bin/ffmpeg
 ENV FFPROBE_BIN=/usr/bin/ffprobe
 ENV APP_PATH=/config/stremio
-ENV NO_CORS=1
-ENV CASTING_DISABLED=1
-ENV IPADDRESS=87.74.111.100
-ENV AUTO_SERVER_URL=1
 
 ENTRYPOINT ["/stremio/start.sh"]
