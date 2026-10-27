@@ -14,8 +14,9 @@ build:
     JELLYFIN_VERSION: "4.4.1-4"
 
 # --- Ports exposed to HA host ---
+# Web UI on 8085, HTTPS on 12470
 ports:
-  "11470/tcp": 11470
+  "8085/tcp": 8085
   "12470/tcp": 12470
 
 # --- Persistent data volume ---
