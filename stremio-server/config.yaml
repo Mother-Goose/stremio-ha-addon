@@ -1,8 +1,8 @@
 ---
 name: "Stremio Server"
 slug: "stremio-server"
-version: "1.2.0"
-version_str: "1.2.0"
+version: "1.3.0"
+version_str: "1.3.0"
 description: "Self-hosted Stremio streaming server for Home Assistant"
 url: "https://github.com/Mother-Goose/stremio-ha-addon"
 
@@ -29,12 +29,13 @@ map:
 
 # --- Environment overrides ---
 # NO_CORS and APP_PATH are required for HA compatibility.
-# IPADDRESS=0-0-0-0 auto-detects public IP; AUTO_SERVER_URL=1 enables auto URL config.
+# IPADDRESS=<your-public-ip> triggers certificate fetch from Stremio API
+# AUTO_SERVER_URL=1 enables auto URL config
 # These must be in config.yaml environment block (not just Dockerfile) to reach the container.
 environment:
   NO_CORS: "1"
   APP_PATH: "/config/stremio"
-  IPADDRESS: "0-0-0-0"
+  IPADDRESS: "87.74.111.100"
   AUTO_SERVER_URL: "1"
 
 # Required by HA add-on runtime
