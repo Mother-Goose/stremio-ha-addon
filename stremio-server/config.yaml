@@ -1,8 +1,8 @@
 ---
 name: "Stremio Server"
 slug: "stremio-server"
-version: "1.3.0"
-version_str: "1.3.0"
+version: "1.3.1"
+version_str: "1.3.1"
 description: "Self-hosted Stremio streaming server for Home Assistant"
 url: "https://github.com/Mother-Goose/stremio-ha-addon"
 
@@ -14,9 +14,10 @@ build:
     JELLYFIN_VERSION: "4.4.1-4"
 
 # --- Ports exposed to HA host ---
-# Web UI on 8085, HTTPS on 12470
+# 11470 = HTTP API, 8085 -> 8080 = Web UI (nginx), 12470 = HTTPS
 ports:
-  "8085/tcp": 8085
+  "11470/tcp": 11470
+  "8085/tcp": 8080
   "12470/tcp": 12470
 
 # --- Persistent data volume ---
