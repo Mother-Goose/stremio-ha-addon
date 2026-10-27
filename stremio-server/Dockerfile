@@ -56,4 +56,4 @@ ENV CASTING_DISABLED=1
 ENV IPADDRESS=0-0-0-0
 ENV AUTO_SERVER_URL=1
 
-ENTRYPOINT ["node", "server.js"]
+ENTRYPOINT ["/stremio/start.sh"]
