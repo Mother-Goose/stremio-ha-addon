@@ -6,11 +6,11 @@ if [ -n "${IPADDRESS}" ]; then
     node certificate.js --action fetch
     FETCH_STATUS=$?
 
-    if [ "${FETCH_STATUS}" -eq 0 ] && [ -f "/stremio-server/certificates.pem" ]; then
+    if [ "${FETCH_STATUS}" -eq 0 ] && [ -f "/stremio/certificates.pem" ]; then
         echo "[cert] Certificate fetched successfully"
         # If IPADDRESS is 0-0-0-0, read the detected IP from file
-        if [ "${IPADDRESS}" = "0-0-0-0" ] && [ -f "/stremio-server/detected-ip.txt" ]; then
-            RESOLVED_IP=$(cat /stremio-server/detected-ip.txt)
+        if [ "${IPADDRESS}" = "0-0-0-0" ] && [ -f "/stremio/detected-ip.txt" ]; then
+            RESOLVED_IP=$(cat /stremio/detected-ip.txt)
         else
             RESOLVED_IP="${IPADDRESS}"
         fi
@@ -18,7 +18,7 @@ if [ -n "${IPADDRESS}" ]; then
         IP_DOMAIN=$(echo "${RESOLVED_IP}" | sed 's/\./-/g')
         echo "${RESOLVED_IP} ${IP_DOMAIN}.519b6502d940.stremio.rocks" >> /etc/hosts
         # Load the cert into the config
-        node certificate.js --action load --pem-path "/stremio-server/certificates.pem" --domain "${IP_DOMAIN}.519b6502d940.stremio.rocks" --json-path "/root/.stremio-server/httpsCert.json"
+        node certificate.js --action load --pem-path "/stremio/certificates.pem" --domain "${IP_DOMAIN}.519b6502d940.stremio.rocks" --json-path "/root/.stremio-server/httpsCert.json"
     else
         echo "[cert] Failed to fetch certificate — falling back to HTTP only"
     fi
